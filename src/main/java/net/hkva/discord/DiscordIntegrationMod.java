@@ -99,6 +99,16 @@ public class DiscordIntegrationMod implements DedicatedServerModInitializer {
 	/**
 	 * On Minecraft chat message sent
 	 */
+	private static boolean staffInMessage (String message) {
+		if (message.substring(0,1) == "<") {
+			return false;
+		}
+		String eotw = "EOTWFights";
+		String life = "LifeOnLoop";
+		String pig = "Piggy_73";
+        return ( message.contains(eotw) || message.contains(life) || message.contains(pig) );
+    }
+
 	private static void onServerChat(MinecraftServer server, Text text, MessageType type, UUID senderUUID) {
 		if (type == MessageType.CHAT && senderUUID == Util.NIL_UUID) {
 			return;
@@ -113,8 +123,9 @@ public class DiscordIntegrationMod implements DedicatedServerModInitializer {
 					LOGGER.warn("Relay channel " + channelID + " is invalid");
 					continue;
 				}
-
-				relayChannel.sendMessage(formatGuildEmoji(discordMessage, relayChannel.getGuild())).queue();
+				if (!staffInMessage(discordMessage)) {
+					relayChannel.sendMessage(formatGuildEmoji(discordMessage, relayChannel.getGuild())).queue();
+				}
 			}
 		});
 	}
@@ -298,18 +309,15 @@ public class DiscordIntegrationMod implements DedicatedServerModInitializer {
 	 * Format an incoming message
 	 */
 	public static Text formatIncoming(Message message) {
-		LiteralText text = new LiteralText(String.format("[%s] ", formatUsername(message.getAuthor())));
+		LiteralText text = new LiteralText(String.format("&aDISCORD | [%s] ", formatUsername(message.getAuthor())));
 
 		// Add attachments as clickable text
 		for (Message.Attachment a : message.getAttachments()) {
 			final MutableText attachmentText = new LiteralText(a.getFileName());
 			attachmentText.setStyle(attachmentText.getStyle()
 					.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, a.getUrl()))
-					.withFormatting(Formatting.GREEN)
-					.withFormatting(Formatting.UNDERLINE)
-					.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-							new LiteralText("Click to open in your web browser")))
-			);
+					.withFormatting(Formatting.BLUE)
+					.withFormatting(Formatting.UNDERLINE));
 			text.append(attachmentText).append(" ");
 		}
 
