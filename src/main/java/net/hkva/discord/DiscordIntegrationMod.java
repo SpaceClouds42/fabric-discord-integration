@@ -13,6 +13,8 @@ import net.hkva.discord.callback.DiscordMessageCallback;
 import net.hkva.discord.callback.ServerChatCallback;
 import net.minecraft.network.MessageType;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.PlayerManager;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.*;
@@ -82,6 +84,21 @@ public class DiscordIntegrationMod implements DedicatedServerModInitializer {
 	/**
 	 * Server tick callback
 	 */
+	private static boolean isPlayerStaff (String name) {
+        String staffNames = "EOTWFights LifeOnLoop Piggy_73";
+        return staffNames.contains(name);
+	}
+	
+	private static int onlineStaffCount (PlayerManager players) {
+        int staffCounter = 0;
+        for (ServerPlayerEntity player : players.getPlayerList()) {
+            if (isPlayerStaff(player.getName().getString())) {
+                staffCounter++;
+            }
+        }
+        return staffCounter;
+	}
+	
 	private static void onServerTick(MinecraftServer server) {
 		// TODO: Replace with player join/leave listeners
 		if (server.getTicks() % PLAYER_COUNT_UPDATE_INTERVAL == 0) {
@@ -90,7 +107,7 @@ public class DiscordIntegrationMod implements DedicatedServerModInitializer {
 				if (lastPlayerCount != playerCount) {
 					lastPlayerCount = playerCount;
 					c.getPresence().setActivity(Activity.playing(String.format("%d/%d players",
-							playerCount, server.getMaxPlayerCount())));
+							playerCount - onlineStaffCount(server.getPlayerManager()), server.getMaxPlayerCount())));
 				}
 			});
 		}
