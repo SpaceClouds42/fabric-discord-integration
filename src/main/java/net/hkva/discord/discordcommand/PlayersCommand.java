@@ -4,7 +4,6 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.hkva.discord.DiscordCommandManager;
 import net.hkva.discord.DiscordIntegrationMod;
 import net.minecraft.server.PlayerManager;

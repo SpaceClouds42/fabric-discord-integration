@@ -9,12 +9,9 @@ import net.hkva.discord.DiscordCommandManager;
 import net.hkva.discord.DiscordIntegrationMod;
 import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.scoreboard.ScoreboardPlayerScore;
-import net.minecraft.scoreboard.ServerScoreboard;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.ListIterator;
 
 public class ScoreboardCommand {
