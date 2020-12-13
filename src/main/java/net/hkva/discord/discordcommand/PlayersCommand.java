@@ -46,7 +46,7 @@ public class PlayersCommand {
 
             int playersInList = 0;
             for (ServerPlayerEntity player : players.getPlayerList()) {
-                if (isPlayerStaff(player.getName().getString())) {
+                if (!isPlayerStaff(player.getName().getString())) {
                     e.appendDescription(DiscordIntegrationMod.escapeDiscordFormatting(player.getName().getString())
                         + "\n");
                 }

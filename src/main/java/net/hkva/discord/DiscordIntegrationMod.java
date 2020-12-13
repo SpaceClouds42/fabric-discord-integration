@@ -117,7 +117,7 @@ public class DiscordIntegrationMod implements DedicatedServerModInitializer {
 	 * On Minecraft chat message sent
 	 */
 	private static boolean staffInMessage (String message) {
-		if (message.substring(0,1) == "<") {
+		if (message.substring(0,1).equals("<")) {
 			return false;
 		}
 		String eotw = "EOTWFights";
@@ -326,7 +326,7 @@ public class DiscordIntegrationMod implements DedicatedServerModInitializer {
 	 * Format an incoming message
 	 */
 	public static Text formatIncoming(Message message) {
-		LiteralText text = new LiteralText(String.format("&aDISCORD | [%s] ", formatUsername(message.getAuthor())));
+		LiteralText text = new LiteralText(String.format("&aDISCORD &7| &f[%s] ", formatUsername(message.getAuthor())));
 
 		// Add attachments as clickable text
 		for (Message.Attachment a : message.getAttachments()) {
