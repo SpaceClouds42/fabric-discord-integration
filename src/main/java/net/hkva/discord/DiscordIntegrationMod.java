@@ -85,7 +85,7 @@ public class DiscordIntegrationMod implements DedicatedServerModInitializer {
 	 * Server tick callback
 	 */
 	private static boolean isPlayerStaff (String name) {
-        String staffNames = "EOTWFights LifeOnLoop Piggy_73";
+        String staffNames = "Distich LifeOnLoop Piggy_73 0a1";
         return staffNames.contains(name);
 	}
 	
@@ -120,10 +120,11 @@ public class DiscordIntegrationMod implements DedicatedServerModInitializer {
 		if (message.substring(0,1).equals("<")) {
 			return false;
 		}
-		String eotw = "EOTWFights";
+		String distich = "Distich";
 		String life = "LifeOnLoop";
 		String pig = "Piggy_73";
-        return ( message.contains(eotw) || message.contains(life) || message.contains(pig) );
+		String geek = "0a1";
+        return (message.contains(0a1) || message.contains(distich) || message.contains(life) || message.contains(pig) );
     }
 
 	private static void onServerChat(MinecraftServer server, Text text, MessageType type, UUID senderUUID) {

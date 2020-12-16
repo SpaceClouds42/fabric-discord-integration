@@ -21,7 +21,7 @@ public class PlayersCommand {
     }
     
     private static boolean isPlayerStaff (String name) {
-        String staffNames = "EOTWFights LifeOnLoop Piggy_73";
+        String staffNames = "Distich LifeOnLoop Piggy_73 0a1";
         return staffNames.contains(name);
     }
 
