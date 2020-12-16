@@ -124,7 +124,7 @@ public class DiscordIntegrationMod implements DedicatedServerModInitializer {
 		String life = "LifeOnLoop";
 		String pig = "Piggy_73";
 		String geek = "0a1";
-        return (message.contains(0a1) || message.contains(distich) || message.contains(life) || message.contains(pig) );
+        return ( message.contains(geek) || message.contains(distich) || message.contains(life) || message.contains(pig) );
     }
 
 	private static void onServerChat(MinecraftServer server, Text text, MessageType type, UUID senderUUID) {
